@@ -7,18 +7,17 @@ namespace RecurringInterval
         public DailyInterval(DateTime startDate, int skipInterval = 1) : base(Period.Daily)
         {
             StartDate = startDate;
-            EndDate = StartDate;
+            SkipInterval = skipInterval;
         }
 
-        public override Interval Next(int skipInterval = 1)
+        public override Interval Next()
         {
-            return new DailyInterval(NextStartDate(skipInterval));
+            return new DailyInterval(NextStartDate(), SkipInterval);
         }
 
-        private DateTime NextStartDate(int skipInterval = 1)
+        private DateTime NextStartDate()
         {
-            if (skipInterval < 1) skipInterval = 1;
-            return EndDate.AddDays(skipInterval);
+            return StartDate.AddDays(SkipInterval);
         }
     }
    

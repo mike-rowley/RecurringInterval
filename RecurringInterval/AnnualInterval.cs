@@ -7,18 +7,17 @@ namespace RecurringInterval
         public AnnualInterval(DateTime startDate, int skipInterval = 1) : base(Period.Annual)
         {
             StartDate = startDate;
-            EndDate = NextStartDate().AddDays(-1);
+            SkipInterval = skipInterval;
         }
 
-        public override Interval Next(int skipInterval = 1)
+        public override Interval Next()
         {
-            return new AnnualInterval(NextStartDate(skipInterval));
+            return new AnnualInterval(NextStartDate(), SkipInterval);
         }
 
-        private DateTime NextStartDate(int skipInterval = 1)
+        private DateTime NextStartDate()
         {
-            if (skipInterval < 1) skipInterval = 1;
-            return EndDate.AddYears(skipInterval);
+            return StartDate.AddYears(SkipInterval);
         }
     }
 }

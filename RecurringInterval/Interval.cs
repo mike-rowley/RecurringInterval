@@ -9,12 +9,15 @@ namespace RecurringInterval
             Period = period;
         }
 
-        public int TotalDays => (int)EndDate.Subtract(StartDate).TotalDays + 1;
-
         public DateTime StartDate { get; protected set; }
-        public DateTime EndDate { get; protected set; }
         public Period Period { get; }
-        public int SkipInterval { get; }
+        private int skipInterval = 1;
+
+        public int SkipInterval
+        {
+            get => skipInterval;
+            set => skipInterval = value < 1 ? 1 : value;
+        }
 
         static readonly IntervalFactory factory = new IntervalFactory();
 
@@ -23,7 +26,7 @@ namespace RecurringInterval
             return factory.CreateFromStartDate(period, startDate, skipInterval);
         }
 
-        public abstract Interval Next(int skipInterval = 1);
+        public abstract Interval Next();
 
     }
 }

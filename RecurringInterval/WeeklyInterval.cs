@@ -7,18 +7,17 @@ namespace RecurringInterval
         public WeeklyInterval(DateTime startDate, int skipInterval = 1) : base(Period.Weekly)
         {
             StartDate = startDate;
-            EndDate = StartDate.AddDays(6);
+            SkipInterval = skipInterval;
         }
 
-        public override Interval Next(int skipInterval = 1)
+        public override Interval Next()
         {
-            return new WeeklyInterval(NextStartDate(skipInterval));
+            return new WeeklyInterval(NextStartDate(), SkipInterval);
         }
 
-        private DateTime NextStartDate(int skipInterval = 1)
+        private DateTime NextStartDate()
         {
-            if (skipInterval < 1) skipInterval = 1;
-            return EndDate.AddDays(skipInterval);
+            return StartDate.AddDays(7 * SkipInterval);
         }
 
     }

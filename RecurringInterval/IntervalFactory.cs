@@ -17,19 +17,19 @@ namespace RecurringInterval
             switch (period)
             {
                 case Period.Monthly:
-                    return new MonthlyInterval(startDate);
+                    return new MonthlyInterval(startDate, skipInterval);
 
                 case Period.Weekly:
-                    return new WeeklyInterval(startDate);
+                    return new WeeklyInterval(startDate, skipInterval);
 
                 case Period.Daily:
-                    return new DailyInterval(startDate);
+                    return new DailyInterval(startDate, skipInterval);
 
                 case Period.Annual:
-                    return new AnnualInterval(startDate);
+                    return new AnnualInterval(startDate, skipInterval);
 
                 default:
-                    return new DailyInterval(startDate); ;
+                    return new DailyInterval(startDate, skipInterval);
             }
         }
     }
