@@ -4,7 +4,7 @@ namespace RecurringInterval
 {
     internal class MonthlyInterval : Interval
     {
-        public MonthlyInterval(DateTime startDate) : base(Period.Monthly)
+        public MonthlyInterval(DateTime startDate, int skipInterval = 1) : base(Period.Monthly)
         {
             StartDate = startDate;
 
@@ -16,14 +16,15 @@ namespace RecurringInterval
                 EndDate = startDate.AddMonths(1).AddDays(-1);
         }
         
-        public override Interval Next()
+        public override Interval Next(int skipInterval = 1)
         {
-            return new MonthlyInterval(NextStartDate());
+            return new MonthlyInterval(NextStartDate(skipInterval));
         }
 
-        private DateTime NextStartDate()
+        private DateTime NextStartDate(int skipInterval = 1)
         {
-            return EndDate.AddDays(1);
+            if (skipInterval < 1) skipInterval = 1;
+            return EndDate.AddDays(skipInterval);
         }
         
     }

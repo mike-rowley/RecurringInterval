@@ -2,15 +2,9 @@
 {
     public enum Period
     {
-        Monthly,
-        Weekly,
-        BiWeekly,
-        Fortnightly = BiWeekly,
-        BiMonthly,
         Daily,
-        FourFourFour,
-        FourFourFive,
-        Quarterly,
+        Weekly,
+        Monthly,
         Annual
     }
 }

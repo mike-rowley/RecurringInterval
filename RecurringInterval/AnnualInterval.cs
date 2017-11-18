@@ -2,22 +2,23 @@
 
 namespace RecurringInterval
 {
-    public class AnnualInterval : Interval
+    internal class AnnualInterval : Interval
     {
-        public AnnualInterval(DateTime startDate) : base(Period.Annual)
+        public AnnualInterval(DateTime startDate, int skipInterval = 1) : base(Period.Annual)
         {
             StartDate = startDate;
             EndDate = NextStartDate().AddDays(-1);
         }
 
-        public override Interval Next()
+        public override Interval Next(int skipInterval = 1)
         {
-            return new AnnualInterval(NextStartDate());
+            return new AnnualInterval(NextStartDate(skipInterval));
         }
 
-        private DateTime NextStartDate()
+        private DateTime NextStartDate(int skipInterval = 1)
         {
-            return EndDate.AddYears(1);
+            if (skipInterval < 1) skipInterval = 1;
+            return EndDate.AddYears(skipInterval);
         }
     }
 }

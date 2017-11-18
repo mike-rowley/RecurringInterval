@@ -14,18 +14,16 @@ namespace RecurringInterval
         public DateTime StartDate { get; protected set; }
         public DateTime EndDate { get; protected set; }
         public Period Period { get; }
-
-        
+        public int SkipInterval { get; }
 
         static readonly IntervalFactory factory = new IntervalFactory();
 
-
-        public static Interval Create(Period period, DateTime startDate, DateTime? firstStartDate = null)
+        public static Interval Create(Period period, DateTime startDate, int skipInterval = 1)
         {
-            return factory.CreateFromStartDate(period, startDate, firstStartDate);
+            return factory.CreateFromStartDate(period, startDate, skipInterval);
         }
 
-        public abstract Interval Next();
+        public abstract Interval Next(int skipInterval = 1);
 
     }
 }
